@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}About - AI Resume Analyzer{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>About This Project</h1>
+    <p>
+        The <strong>AI Resume Analyzer and Career Guidance Portal</strong> is a
+        Data Science project that uses Natural Language Processing and Machine
+        Learning to analyze resumes and provide personalized career guidance.
+    </p>
+    <h2>Technology Stack</h2>
+    <ul>
+        <li><strong>Backend:</strong> Python, Flask</li>
+        <li><strong>NLP:</strong> Regex-based extraction</li>
+        <li><strong>ML:</strong> scikit-learn (TF-IDF, Cosine Similarity)</li>
+        <li><strong>Data:</strong> pandas, NumPy</li>
+        <li><strong>Frontend:</strong> HTML, CSS, JavaScript</li>
+    </ul>
+    <h2>Features</h2>
+    <ul>
+        <li>PDF and DOCX resume parsing</li>
+        <li>Skill extraction from resume text</li>
+        <li>100-point resume scoring</li>
+        <li>ML-based job recommendations</li>
+        <li>Skill gap analysis and course suggestions</li>
+    </ul>
+</div>
+{% endblock %}

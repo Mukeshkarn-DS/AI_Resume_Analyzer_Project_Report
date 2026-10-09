@@ -1,0 +1,194 @@
+{
+    "python": [
+        {
+            "name": "Python for Everybody",
+            "platform": "Coursera",
+            "url": "https://coursera.org/specializations/python",
+            "duration": "8 months"
+        }
+    ],
+    "machine learning": [
+        {
+            "name": "Machine Learning by Andrew Ng",
+            "platform": "Coursera",
+            "url": "https://coursera.org/learn/machine-learning",
+            "duration": "3 months"
+        }
+    ],
+    "deep learning": [
+        {
+            "name": "Deep Learning Specialization",
+            "platform": "Coursera",
+            "url": "https://coursera.org/specializations/deep-learning",
+            "duration": "5 months"
+        }
+    ],
+    "nlp": [
+        {
+            "name": "NLP with Python",
+            "platform": "Coursera",
+            "url": "https://coursera.org/learn/nlp-with-python",
+            "duration": "2 months"
+        }
+    ],
+    "sql": [
+        {
+            "name": "SQL for Data Science",
+            "platform": "Coursera",
+            "url": "https://coursera.org/learn/sql-for-data-science",
+            "duration": "1 month"
+        }
+    ],
+    "react": [
+        {
+            "name": "React - The Complete Guide",
+            "platform": "Udemy",
+            "url": "https://udemy.com/course/react-the-complete-guide",
+            "duration": "48 hours"
+        }
+    ],
+    "nodejs": [
+        {
+            "name": "Node.js Complete Guide",
+            "platform": "Udemy",
+            "url": "https://udemy.com",
+            "duration": "35 hours"
+        }
+    ],
+    "tensorflow": [
+        {
+            "name": "TensorFlow Developer Certificate",
+            "platform": "Coursera",
+            "url": "https://coursera.org/professional-certificates/tensorflow-in-practice",
+            "duration": "4 months"
+        }
+    ],
+    "pytorch": [
+        {
+            "name": "PyTorch for Deep Learning",
+            "platform": "Udemy",
+            "url": "https://udemy.com",
+            "duration": "25 hours"
+        }
+    ],
+    "docker": [
+        {
+            "name": "Docker Mastery",
+            "platform": "Udemy",
+            "url": "https://udemy.com/course/docker-mastery",
+            "duration": "20 hours"
+        }
+    ],
+    "kubernetes": [
+        {
+            "name": "Kubernetes for Beginners",
+            "platform": "Udemy",
+            "url": "https://udemy.com",
+            "duration": "15 hours"
+        }
+    ],
+    "aws": [
+        {
+            "name": "AWS Certified Cloud Practitioner",
+            "platform": "Udemy",
+            "url": "https://udemy.com",
+            "duration": "15 hours"
+        }
+    ],
+    "statistics": [
+        {
+            "name": "Statistics with Python",
+            "platform": "Coursera",
+            "url": "https://coursera.org/specializations/statistics-with-python",
+            "duration": "4 months"
+        }
+    ],
+    "tableau": [
+        {
+            "name": "Tableau for Data Science",
+            "platform": "Udemy",
+            "url": "https://udemy.com",
+            "duration": "12 hours"
+        }
+    ],
+    "power bi": [
+        {
+            "name": "Power BI Complete Guide",
+            "platform": "Udemy",
+            "url": "https://udemy.com",
+            "duration": "18 hours"
+        }
+    ],
+    "excel": [
+        {
+            "name": "Excel Skills for Business",
+            "platform": "Coursera",
+            "url": "https://coursera.org/specializations/excel",
+            "duration": "3 months"
+        }
+    ],
+    "pandas": [
+        {
+            "name": "Data Analysis with Python",
+            "platform": "Coursera",
+            "url": "https://coursera.org/learn/data-analysis-with-python",
+            "duration": "1 month"
+        }
+    ],
+    "data visualization": [
+        {
+            "name": "Data Visualization with Python",
+            "platform": "Coursera",
+            "url": "https://coursera.org/learn/python-for-data-visualization",
+            "duration": "1 month"
+        }
+    ],
+    "html": [
+        {
+            "name": "HTML, CSS, JavaScript",
+            "platform": "freeCodeCamp",
+            "url": "https://freecodecamp.org",
+            "duration": "Self-paced"
+        }
+    ],
+    "css": [
+        {
+            "name": "CSS Complete Guide",
+            "platform": "Udemy",
+            "url": "https://udemy.com",
+            "duration": "20 hours"
+        }
+    ],
+    "javascript": [
+        {
+            "name": "JavaScript - The Complete Guide",
+            "platform": "Udemy",
+            "url": "https://udemy.com",
+            "duration": "52 hours"
+        }
+    ],
+    "git": [
+        {
+            "name": "Git Complete Guide",
+            "platform": "Udemy",
+            "url": "https://udemy.com",
+            "duration": "6 hours"
+        }
+    ],
+    "communication": [
+        {
+            "name": "Effective Communication",
+            "platform": "Coursera",
+            "url": "https://coursera.org",
+            "duration": "1 month"
+        }
+    ],
+    "leadership": [
+        {
+            "name": "Leadership and Management",
+            "platform": "Coursera",
+            "url": "https://coursera.org",
+            "duration": "2 months"
+        }
+    ]
+}

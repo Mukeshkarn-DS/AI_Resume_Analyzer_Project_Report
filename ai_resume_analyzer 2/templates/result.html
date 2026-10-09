@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+{% block title %}Analysis Result - AI Resume Analyzer{% endblock %}
+
+{% block content %}
+<div class="container result-container">
+
+    <!-- Header -->
+    <div class="result-header">
+        <div>
+            <h1>Resume Analysis Report</h1>
+            <p class="file-name">
+                <span class="file-icon">📄</span>
+                <strong>{{ filename }}</strong> · {{ word_count }} words
+            </p>
+        </div>
+        <div class="result-actions-top">
+            <a href="/" class="btn-outline">← New Analysis</a>
+            <button onclick="window.print()" class="btn-primary-sm">🖨 Print</button>
+        </div>
+    </div>
+
+    <!-- Contact Info -->
+    <section class="result-section">
+        <div class="section-title-row">
+            <span class="section-icon">👤</span>
+            <h2>Contact Information</h2>
+        </div>
+        <div class="info-grid">
+            <div class="info-item"><span class="info-label">Name</span><span class="info-value">{{ contact.name
+                    }}</span></div>
+            <div class="info-item"><span class="info-label">Email</span><span class="info-value">{{ contact.email
+                    }}</span></div>
+            <div class="info-item"><span class="info-label">Phone</span><span class="info-value">{{ contact.phone
+                    }}</span></div>
+            <div class="info-item"><span class="info-label">LinkedIn</span><span class="info-value">{{ contact.linkedin
+                    }}</span></div>
+            <div class="info-item"><span class="info-label">GitHub</span><span class="info-value">{{ contact.github
+                    }}</span></div>
+        </div>
+    </section>
+
+    <!-- Score -->
+    <section class="result-section">
+        <div class="section-title-row">
+            <span class="section-icon">🏆</span>
+            <h2>Resume Score</h2>
+            {% if score.source == "ml" %}
+            <span class="ml-badge">🤖 ML Powered</span>
+            {% else %}
+            <span class="ml-badge heuristic">⚙️ Heuristic</span>
+            {% endif %}
+        </div>
+
+        <div class="score-panel">
+            <div class="score-circle-wrap">
+                <div class="score-circle" style="--score: {{ score.total }}; --grade-color: {{ score.grade_color }};">
+                    <div class="score-inner">
+                        <span class="score-number">{{ score.total }}</span>
+                        <span class="score-max">/ 100</span>
+                    </div>
+                </div>
+                <div class="score-grade" style="color: {{ score.grade_color }}">{{ score.grade }}</div>
+            </div>
+
+            {% if score.breakdown %}
+            <div class="breakdown-panel">
+                <h3>Score Breakdown</h3>
+                {% for k, v in score.breakdown.items() %}
+                {% set maxv = 30 if k == "Skills" else 20 if k == "Experience" else 15 if (k == "Education" or k ==
+                "Projects") else 10 %}
+                <div class="breakdown-row">
+                    <div class="breakdown-label">
+                        <span>{{ k }}</span>
+                        <span class="breakdown-value">{{ v }} / {{ maxv }}</span>
+                    </div>
+                    <div class="breakdown-bar">
+                        <div class="breakdown-fill" style="width: {{ (v / maxv * 100)|round(1) }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Feature Insights -->
+    {% if features %}
+    <section class="result-section ml-section">
+        <div class="section-title-row">
+            <span class="section-icon">📊</span>
+            <h2>AI Feature Insights</h2>
+            <span class="ml-badge">ML Extracted</span>
+        </div>
+        <p class="section-desc">Advanced features extracted from your resume by the ML pipeline.</p>
+
+        <div class="feature-insights-grid">
+            <div class="insight-card">
+                <div class="insight-icon">⚡</div>
+                <div class="insight-value">{{ features.action_verb_count or 0 }}</div>
+                <div class="insight-label">Action Verbs</div>
+                <div class="insight-hint">Strong verbs like "developed"</div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon">📈</div>
+                <div class="insight-value">{{ features.quantified_count or 0 }}</div>
+                <div class="insight-label">Quantified Results</div>
+                <div class="insight-hint">Numbers, %, $ amounts</div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon">📖</div>
+                <div class="insight-value">{{ "%.0f"|format(features.flesch_reading_ease or 0) }}</div>
+                <div class="insight-label">Readability</div>
+                <div class="insight-hint">60-70 is ideal</div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon">🎯</div>
+                <div class="insight-value">{{ "%.2f"|format(features.skill_density or 0) }}</div>
+                <div class="insight-label">Skill Density</div>
+                <div class="insight-hint">Skills per 100 words</div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon">📝</div>
+                <div class="insight-value">{{ features.word_count or 0 }}</div>
+                <div class="insight-label">Word Count</div>
+                <div class="insight-hint">200-1000 is ideal</div>
+            </div>
+            <div class="insight-card">
+                <div class="insight-icon">🔗</div>
+                <div class="insight-value">
+                    {{ (features.has_email or 0) + (features.has_phone or 0) + (features.has_linkedin or 0) +
+                    (features.has_github or 0) }}/4
+                </div>
+                <div class="insight-label">Contact Links</div>
+                <div class="insight-hint">Email, phone, LinkedIn, GitHub</div>
+            </div>
+        </div>
+
+        <div class="section-presence">
+            <strong>Section Presence:</strong>
+            {% for sec in ["education", "experience", "projects", "skills", "certifications", "awards"] %}
+            {% set key = "has_" + sec %}
+            {% if features[key] %}
+            <span class="presence-badge present">✓ {{ sec|capitalize }}</span>
+            {% else %}
+            <span class="presence-badge missing">✗ {{ sec|capitalize }}</span>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Skills -->
+    <section class="result-section">
+        <div class="section-title-row">
+            <span class="section-icon">🛠</span>
+            <h2>Extracted Skills</h2>
+            <span class="count-badge">{{ skills|length }} found</span>
+        </div>
+        {% if skills %}
+        <div class="skills-container">
+            {% for s in skills %}<span class="skill-tag">{{ s }}</span>{% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <p>No skills detected. Add a <strong>Skills</strong> section to your resume.</p>
+        </div>
+        {% endif %}
+    </section>
+
+    <!-- Job Recommendations -->
+    <section class="result-section">
+        <div class="section-title-row">
+            <span class="section-icon">💼</span>
+            <h2>Recommended Job Roles</h2>
+            <span class="ml-badge">SBERT + LTR</span>
+        </div>
+        <div class="jobs-grid">
+            {% for r in recommendations %}
+            <div class="job-card">
+                <div class="job-card-header">
+                    <h3>{{ r.job_role }}</h3>
+                    <span class="match-badge">{{ r.match_percent }}%</span>
+                </div>
+                <div class="match-bar">
+                    <div class="match-fill" style="width: {{ r.match_percent }}%"></div>
+                </div>
+                <div class="job-meta">
+                    <span class="job-meta-item">🎓 {{ r.education }}</span>
+                    <span class="job-meta-item">⏳ {{ r.experience }} yrs</span>
+                </div>
+                <div class="job-skills">
+                    <strong>Required Skills:</strong>
+                    <div class="skills-container compact">
+                        {% for s in r.required_skills.split(',') %}
+                        <span class="skill-tag small">{{ s.strip() }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="job-explanation">
+                    <em>💡 {{ r.explanation }}</em>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Career Guidance -->
+    <section class="result-section">
+        <div class="section-title-row">
+            <span class="section-icon">🚀</span>
+            <h2>Career Guidance</h2>
+        </div>
+        {% for g in guidance %}
+        <div class="guidance-card">
+            <div class="guidance-header">
+                <h3>{{ g.job_role }}</h3>
+                <span class="match-badge">{{ g.match_percent }}% match</span>
+            </div>
+
+            <div class="readiness-row">
+                <span class="readiness-label">Readiness</span>
+                <div class="readiness-bar">
+                    <div class="readiness-fill" style="width: {{ g.readiness }}%"></div>
+                </div>
+                <span class="readiness-value">{{ g.readiness }}% ({{ g.total_matched }}/{{ g.total_required }})</span>
+            </div>
+
+            {% if g.missing_skills %}
+            <div class="missing-skills">
+                <strong>Missing Skills:</strong>
+                <div class="skills-container compact">
+                    {% for s in g.missing_skills %}<span class="missing-tag">{{ s }}</span>{% endfor %}
+                </div>
+            </div>
+            {% else %}
+            <div class="all-good">✓ You have all the required skills!</div>
+            {% endif %}
+
+            {% if g.courses %}
+            <div class="courses">
+                <strong>📚 Recommended Courses</strong>
+                <div class="course-list">
+                    {% for c in g.courses %}
+                    <a href="{{ c.url }}" target="_blank" class="course-item">
+                        <div class="course-skill">{{ c.skill }}</div>
+                        <div class="course-name">{{ c.course_name }}</div>
+                        <div class="course-platform">{{ c.platform }} · {{ c.duration }}</div>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </section>
+
+    <!-- Overall Advice -->
+    {% if overall_advice %}
+    <section class="result-section">
+        <div class="section-title-row">
+            <span class="section-icon">💡</span>
+            <h2>Overall Advice</h2>
+        </div>
+        <div class="advice-list">
+            {% for a in overall_advice %}
+            <div class="advice advice-{{ a.type }}">{{ a.message }}</div>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+    <!-- Bottom actions -->
+    <div class="result-actions-bottom">
+        <a href="/" class="btn-primary">← Analyze Another Resume</a>
+        <button onclick="window.print()" class="btn-outline">🖨 Print Report</button>
+    </div>
+
+</div>
+{% endblock %}

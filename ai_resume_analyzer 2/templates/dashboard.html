@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% block title %}Dashboard - AI Resume Analyzer{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="dashboard-header">
+        <div>
+            <h1>Welcome back, {{ user_name }} 👋</h1>
+            <p class="subtitle">Here's your resume analysis history</p>
+        </div>
+        <a href="/" class="btn-primary">+ New Analysis</a>
+    </div>
+
+    {% if history %}
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">📄</div>
+            <div class="stat-value">{{ history|length }}</div>
+            <div class="stat-label">Total Analyses</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-value">
+                {{ (history | selectattr('score') | map(attribute='score') | list | sum / history|length) | round(1) if
+                history else 0 }}
+            </div>
+            <div class="stat-label">Avg Score</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-value">
+                {{ (history | selectattr('score') | map(attribute='score') | list | max) or 0 }}
+            </div>
+            <div class="stat-label">Best Score</div>
+        </div>
+    </div>
+
+    <div class="history-table-wrap">
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th>File</th>
+                    <th>Score</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for h in history %}
+                <tr>
+                    <td><span class="file-chip">📄 {{ h.file_path.split('/')[-1] }}</span></td>
+                    <td>
+                        {% if h.score is not none %}
+                        <span class="score-chip
+                {% if h.score >= 85 %}score-excellent
+                {% elif h.score >= 70 %}score-good
+                {% elif h.score >= 50 %}score-average
+                {% else %}score-poor{% endif %}">
+                            {{ h.score }}
+                        </span>
+                        {% else %}
+                        <span class="muted">—</span>
+                        {% endif %}
+                    </td>
+                    <td class="muted">{{ h.upload_date.strftime("%b %d, %Y · %H:%M") }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% else %}
+    <div class="empty-state large">
+        <div class="empty-icon">📭</div>
+        <h2>No analyses yet</h2>
+        <p>Upload your first resume to get started.</p>
+        <a href="/" class="btn-primary">Upload Resume</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

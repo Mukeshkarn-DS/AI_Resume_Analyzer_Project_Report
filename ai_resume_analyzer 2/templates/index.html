@@ -1,0 +1,107 @@
+{% extends "base.html" %}
+{% block title %}Home - AI Resume Analyzer{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="hero">
+        <div class="hero-badge">✨ Powered by Machine Learning</div>
+        <h1 class="hero-title">
+            Analyze Your Resume.<br>
+            <span class="gradient-text">Land Your Dream Job.</span>
+        </h1>
+        <p class="hero-subtitle">
+            Upload your resume and get instant AI-powered analysis, semantic job matching,
+            personalized career guidance, and skill gap insights — all in seconds.
+        </p>
+    </section>
+
+    <section class="upload-section">
+        <form action="/analyze" method="POST" enctype="multipart/form-data" id="uploadForm">
+            <div class="upload-box" id="uploadBox">
+                <div class="upload-icon-wrapper">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="1.5">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="17 8 12 3 7 8" />
+                        <line x1="12" y1="3" x2="12" y2="15" />
+                    </svg>
+                </div>
+                <h3>Drag & Drop Your Resume</h3>
+                <p>or click below to browse files</p>
+                <input type="file" name="resume" id="resumeInput" accept=".pdf,.docx" required hidden>
+                <button type="button" class="btn-primary" onclick="document.getElementById('resumeInput').click()">
+                    Choose File
+                </button>
+                <p class="file-info" id="fileInfo"></p>
+                <p class="format-info">Supported: PDF, DOCX · Max 5 MB</p>
+            </div>
+            <button type="submit" class="btn-submit" id="submitBtn" disabled>
+                <span>🚀 Analyze Resume</span>
+            </button>
+        </form>
+    </section>
+
+    <section class="features">
+        <div class="section-header">
+            <h2>What You Get</h2>
+            <p class="section-subtitle">Six powerful insights from a single upload</p>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon gradient-1">📊</div>
+                <h3>Resume Score</h3>
+                <p>AI-powered 100-point scoring across multiple criteria</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon gradient-2">🎯</div>
+                <h3>Skill Extraction</h3>
+                <p>Named Entity Recognition identifies your real skills</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon gradient-3">💼</div>
+                <h3>Job Matching</h3>
+                <p>Semantic SBERT embeddings find best-fit roles</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon gradient-4">📈</div>
+                <h3>Skill Gap Analysis</h3>
+                <p>See exactly what's missing for your target role</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon gradient-5">📚</div>
+                <h3>Course Recommendations</h3>
+                <p>Curated learning paths from top platforms</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon gradient-6">🔍</div>
+                <h3>Explainable AI</h3>
+                <p>SHAP-powered insights into every recommendation</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="how-it-works">
+        <div class="section-header">
+            <h2>How It Works</h2>
+            <p class="section-subtitle">Three simple steps to better career insights</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <h3>Upload</h3>
+                <p>Drop your PDF or DOCX resume into the upload box.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <h3>Analyze</h3>
+                <p>Our ML pipeline extracts skills, scores, and matches jobs.</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <h3>Improve</h3>
+                <p>Follow personalized recommendations and close skill gaps.</p>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
