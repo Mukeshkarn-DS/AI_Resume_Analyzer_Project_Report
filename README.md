@@ -5,7 +5,7 @@ An AI-assisted web application that analyzes uploaded resumes, extracts candidat
 **Project report:** [Download the project report (DOCX)](AI_Resume_Analyzer_Project_Report.docx)  
 **Source code:** [Open the application folder](https://github.com/Mukeshkarn-DS/AI_Resume_Analyzer_Project_Report/tree/main/ai_resume_analyzer%202)
 
-## Overview
+## About the Project
 
 The project is designed to help users understand how their resume presents their skills and experience. Users can upload a resume and review a generated analysis, suggested roles, and career-improvement guidance. Registered users can access a dashboard with previous analyses.
 
